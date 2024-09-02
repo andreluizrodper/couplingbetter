@@ -2,7 +2,11 @@
   <div v-if="account" :class="`flex justify-between gap-2 ${className}`">
     <div class="flex items-center gap-2 justify-start">
       <Avatar class="flex items-center justify-center">
-        <img v-if="account.avatar" :src="account.avatar" class="size-12" />
+        <img
+          v-if="account.avatar"
+          :src="account.avatar"
+          class="size-12 object-cover object-center"
+        />
         <AvatarFallback v-if="!account.avatar">
           <LoaderCircle v-if="!account" class="size-4 animate-spin" />
           {{ initials }}

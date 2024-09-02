@@ -15,7 +15,11 @@
       <CardContent>
         <form @submit.prevent="save" class="flex flex-col gap-8">
           <div class="relative overflow-hidden flex justify-center">
-            <img v-if="avatar" :src="avatar" class="size-24 rounded-full" />
+            <img
+              v-if="avatar"
+              :src="avatar"
+              class="object-cover object-center size-24 rounded-full"
+            />
             <div
               v-if="!avatar"
               class="size-24 rounded-full bg-gray-50 border flex items-center justify-center text-gray-500"
