@@ -1,8 +1,9 @@
 <template>
-  <div :class="`flex justify-between gap-2 ${className}`">
+  <div v-if="account" :class="`flex justify-between gap-2 ${className}`">
     <div class="flex items-center gap-2 justify-start">
       <Avatar class="flex items-center justify-center">
-        <AvatarFallback>
+        <img v-if="account.avatar" :src="account.avatar" class="size-12" />
+        <AvatarFallback v-if="!account.avatar">
           <LoaderCircle v-if="!account" class="size-4 animate-spin" />
           {{ initials }}
         </AvatarFallback>
@@ -28,7 +29,6 @@ export default {
   props: {
     id: {
       type: String,
-      required: true,
     },
     showName: {
       type: Boolean,
@@ -45,6 +45,9 @@ export default {
     LoaderCircle,
   },
   computed: {
+    account() {
+      return this.$store.state.account;
+    },
     initials() {
       if (!this.account) return "";
       if (!this.account.name) return "A";
@@ -55,17 +58,17 @@ export default {
     },
   },
   mounted() {
-    this.getData();
-    console.log("asd");
+    if (this.account.id !== this.id) this.getData();
+    else this.accountData = this.account;
   },
   data() {
     return {
-      account: null,
+      accountData: null,
     };
   },
   methods: {
     async getData() {
-      this.account = await getAccount({ id: this.id, setStore: false });
+      this.accountData = await getAccount({ id: this.id, setStore: false });
     },
   },
 };

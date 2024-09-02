@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-4 bg-green-400 dark:bg-purple-950 py-2 w-full justify-between flex items-center"
+    class="hidden px-4 bg-green-400 dark:bg-purple-950 py-2 w-full justify-between md:flex items-center"
   >
     <div>
       <Logo size="h-9" />
@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Notifications from "@/components/dashboard/ui/notifications.vue";
-import UserMenu from "@/components/dashboard/ui/user-menu.vue";
+import Notifications from "@/components/platform/ui/notifications.vue";
+import UserMenu from "@/components/platform/ui/user-menu.vue";
 import Logo from "@/components/ui/logo.vue";
 
 export default {

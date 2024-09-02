@@ -14,7 +14,7 @@ const routes = [
         component: () => import("@/views/auth/pin.vue"),
       },
       {
-        path: "invite/:account_id",
+        path: "i/:account_id",
         name: "invite",
         component: () => import("@/views/auth/invite.vue"),
       },

@@ -79,4 +79,9 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  [placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #555;
+  }
 }

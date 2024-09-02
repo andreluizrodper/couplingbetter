@@ -18,9 +18,13 @@ export default createStore({
     phone: null,
     restaurants: {},
     restaurant: {},
+    createCouple: null,
   },
   mutations: {
     ...toastFunctions,
+    setCreateCouple(state, data) {
+      state.createCouple = data;
+    },
     setRestaurants(state, data) {
       state.restaurants = data;
     },

@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import store from "@/store";
 
 const collection = "account";
-const api = "https://api.veaconta.com";
+const api = "https://api.couplingbetter.com";
 
 const updateAccount = async ({ id, data }) => {
   try {
@@ -26,7 +26,7 @@ const createAccount = async ({ data, setStore = true }) => {
   try {
     const uuid = uuidv4();
     data.uuid = uuid;
-    fetch(`${api}/firebase`, {
+    await fetch(`${api}/firebase`, {
       body: JSON.stringify({
         collection,
         data,
@@ -37,8 +37,8 @@ const createAccount = async ({ data, setStore = true }) => {
       },
     })
       .then((data) => data.json())
-      .then((res) => {
-        if (setStore) getAccount({ id: res.data.id });
+      .then(async (res) => {
+        if (setStore) await getAccount({ id: res.id });
       });
   } catch (error) {
     console.error("Error adding document: ", error);
@@ -46,7 +46,7 @@ const createAccount = async ({ data, setStore = true }) => {
 };
 
 const getAccount = async ({ id, setStore = true }) => {
-  return await fetch(`${api}/firebase/get`, {
+  return await fetch(`${api}/firebase/single`, {
     body: JSON.stringify({
       collection,
       id,
@@ -58,8 +58,8 @@ const getAccount = async ({ id, setStore = true }) => {
   })
     .then((data) => data.json())
     .then((res) => {
-      if (setStore) store.commit("setAccount", res[0]);
-      return res[0];
+      if (setStore) store.commit("setAccount", res);
+      return res;
     });
 };
 

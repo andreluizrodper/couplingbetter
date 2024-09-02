@@ -1,18 +1,5 @@
 <template>
-  <div class="flex items-center text-lg font-medium gap-2">
-    <img
-      v-if="!clear"
-      src="@/assets/logo.svg"
-      class="dark:invert"
-      :class="size"
-    />
-    <img
-      v-if="clear"
-      src="@/assets/logo-clear.svg"
-      class="dark:invert"
-      :class="size"
-    />
-  </div>
+  <div class="flex items-center text-lg font-medium gap-2">Coupling better</div>
 </template>
 
 <script>

@@ -6,28 +6,10 @@
     <DropdownMenuContent v-if="account" align="end">
       <DropdownMenuLabel>{{ greeting }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
+      <DropdownMenuItem> Minha conta </DropdownMenuItem>
+      <DropdownMenuSeparator />
       <DropdownMenuItem>
         <ToggleTheme />
-      </DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuLabel v-if="restaurants.lenght > 0"
-        >Seus restaurantes</DropdownMenuLabel
-      >
-      <DropdownMenuItem
-        v-for="item in restaurants"
-        :key="item.id"
-        :disabled="item.id === restaurant.id"
-      >
-        <div class="flex gap-2 items-center">
-          <span class="w-4 flex items-center justify-center">
-            <Check size="14" v-if="item.id === restaurant.id" />
-          </span>
-          {{ item.name }}
-          <span
-            v-if="restaurant.isOpen"
-            class="size-2 bg-green-400 animate-pulse rounded-full"
-          />
-        </div>
       </DropdownMenuItem>
       <DropdownMenuSeparator />
       <DropdownMenuItem @click="logOut">
@@ -59,7 +41,7 @@ import { LogOut } from "lucide-vue-next";
 import { signOut } from "firebase/auth";
 import { auth } from "@/utils/firebase.js";
 import AccountAvatar from "@/components/ui/account-avatar.vue";
-import ToggleTheme from "@/components/dashboard/ui/toggle-theme.vue";
+import ToggleTheme from "@/components/platform/ui/toggle-theme.vue";
 
 export default {
   computed: {

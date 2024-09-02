@@ -40,21 +40,23 @@ export default {
       window.localStorage.getItem("theme_veaconta") || "light"
     );
     onAuthStateChanged(auth, async (user) => {
-      if (!user) this.$router.push({ name: "login" });
+      console.log(this.$route.name);
+      if (!user && this.$route.name !== "invite")
+        this.$router.push({ name: "login" });
       if (user && !this.account) {
         const checkAccountExists = await accountExists({ id: user.uid });
         if (checkAccountExists) {
           this.$store.commit("setUser", user);
           await loginAccount({ id: user.uid });
           if (this.$route.path === "/") {
-            this.$router.push({ name: "dashboard" });
+            this.$router.push({ name: "feed" });
           }
           this.loading = false;
         } else {
           this.loading = false;
         }
       } else {
-        if (this.$route.path.includes("dashboard")) {
+        if (this.$route.path.includes("platform")) {
           this.$router.push({ name: "login" });
         }
         this.loading = false;

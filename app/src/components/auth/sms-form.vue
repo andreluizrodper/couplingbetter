@@ -84,10 +84,10 @@ export default {
             owner: result.user.uid,
           };
           await createAccount({ data });
-          this.$router.push({ name: "dashboard" });
+          this.$router.push({ name: "feed" });
         } else {
           await loginAccount({ id: result.user.uid });
-          this.$router.push({ name: "dashboard" });
+          this.$router.push({ name: "feed" });
         }
       });
     },

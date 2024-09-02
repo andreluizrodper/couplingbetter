@@ -26,6 +26,7 @@ import { Label } from "@/components/ui/label";
 import { LoaderCircle } from "lucide-vue-next";
 import Loading from "@/components/ui/loading.vue";
 import { loginAccount, createAccount, accountExists } from "@/utils/account.js";
+import { createCouple } from "@/utils/couple.js";
 import { PhoneAuthProvider, signInWithCredential } from "firebase/auth";
 import { auth } from "@/utils/firebase.js";
 import {
@@ -53,12 +54,17 @@ export default {
       message: "",
     };
   },
+  computed: {
+    couple() {
+      return this.$store.state.createCouple;
+    },
+  },
   methods: {
     handleComplete() {
       this.loading = true;
       var credential = PhoneAuthProvider.credential(
         this.$route.params.code,
-        this.value.join(""),
+        this.value.join("")
       );
       signInWithCredential(auth, credential)
         .then(async (result) => {
@@ -72,10 +78,11 @@ export default {
               owner: result.user.uid,
             };
             await createAccount({ data });
-            this.$router.push({ name: "dashboard" });
+            if (this.createCouple) createCouple();
+            this.$router.push({ name: "feed" });
           } else {
             await loginAccount({ id: result.user.uid });
-            this.$router.push({ name: "dashboard" });
+            this.$router.push({ name: "feed" });
           }
           this.loading = false;
         })
