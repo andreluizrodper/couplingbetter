@@ -6,20 +6,17 @@
       <Logo size="h-9" />
     </div>
     <div class="flex items-center gap-4">
-      <Notifications v-if="account" />
       <UserMenu />
     </div>
   </div>
 </template>
 
 <script>
-import Notifications from "@/components/platform/ui/notifications.vue";
 import UserMenu from "@/components/platform/ui/user-menu.vue";
 import Logo from "@/components/ui/logo.vue";
 
 export default {
   components: {
-    Notifications,
     UserMenu,
     Logo,
   },
