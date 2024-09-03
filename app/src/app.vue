@@ -40,9 +40,6 @@ export default {
       window.localStorage.getItem("theme_veaconta") || "light"
     );
     onAuthStateChanged(auth, async (user) => {
-      console.log(this.$route.name);
-      if (!user && this.$route.name !== "invite")
-        this.$router.push({ name: "login" });
       if (user && !this.account) {
         const checkAccountExists = await accountExists({ id: user.uid });
         if (checkAccountExists) {
@@ -56,9 +53,6 @@ export default {
           this.loading = false;
         }
       } else {
-        if (this.$route.path.includes("platform")) {
-          this.$router.push({ name: "login" });
-        }
         this.loading = false;
       }
     });

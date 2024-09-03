@@ -41,11 +41,11 @@ const createCouple = async () => {
         "content-type": "application/json",
       },
     }).then((data) => data.json());
-    updateAccount({
+    await updateAccount({
       id: store.state.createCouple,
       data: { inCouple: true, couple_id: couple.id },
     });
-    updateAccount({
+    await updateAccount({
       id: store.state.account.id,
       data: { inCouple: true, couple_id: couple.id },
     });

@@ -85,10 +85,11 @@ export default {
             owner: result.user.uid,
           };
           await createAccount({ data });
-          createCouple();
+          await createCouple();
           this.$router.push({ name: "feed" });
         } else {
           await loginAccount({ id: result.user.uid });
+          await createCouple();
           this.$router.push({ name: "feed" });
         }
       });
