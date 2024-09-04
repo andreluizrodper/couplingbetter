@@ -31,7 +31,7 @@
         <Gem />
       </router-link>
       <div>
-        <AccountAvatar className="scale-75" :id="account.id" />
+        <UserMenu avatarClass="scale-75" />
       </div>
     </div>
   </div>
@@ -40,6 +40,7 @@
 <script>
 import AccountAvatar from "@/components/ui/account-avatar.vue";
 import { Gamepad, Goal, Home, Image, Gem } from "lucide-vue-next";
+import UserMenu from "@/components/platform/ui/user-menu.vue";
 
 export default {
   components: {
@@ -49,6 +50,7 @@ export default {
     Goal,
     Gem,
     AccountAvatar,
+    UserMenu,
   },
   computed: {
     year() {

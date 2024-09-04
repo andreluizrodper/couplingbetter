@@ -1,3 +1,5 @@
+@import "maz-ui/styles";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

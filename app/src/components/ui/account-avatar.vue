@@ -1,26 +1,26 @@
 <template>
-  <div v-if="account" :class="`flex justify-between gap-2 ${className}`">
+  <div v-if="accountData" :class="`flex justify-between gap-2 ${className}`">
     <div class="flex items-center gap-2 justify-start">
       <Avatar class="flex items-center justify-center">
         <img
-          v-if="account.avatar"
-          :src="account.avatar"
+          v-if="accountData.avatar"
+          :src="accountData.avatar"
           class="size-12 object-cover object-center"
         />
-        <AvatarFallback v-if="!account.avatar">
-          <LoaderCircle v-if="!account" class="size-4 animate-spin" />
+        <AvatarFallback v-if="!accountData.avatar">
+          <LoaderCircle v-if="!accountData" class="size-4 animate-spin" />
           {{ initials }}
         </AvatarFallback>
       </Avatar>
       <div
-        v-if="showName && account"
+        v-if="showName && accountData"
         class="flex flex-col justify-center items-start"
       >
-        {{ account.name }}
-        <span class="text-xs">{{ account.email }}</span>
+        {{ accountData.name }}
+        <span class="text-xs">{{ accountData.email }}</span>
       </div>
     </div>
-    <slot :account="account" />
+    <slot :account="accountData" />
   </div>
 </template>
 

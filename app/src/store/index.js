@@ -6,6 +6,7 @@ export default createStore({
   state: {
     user: {},
     account: null,
+    otherHalfAccount: null,
     theme: "light",
     projectSheet: { status: false },
     taskSheet: { status: false },
@@ -22,6 +23,9 @@ export default createStore({
   },
   mutations: {
     ...toastFunctions,
+    setOtherHalfAccount(state, data) {
+      state.otherHalfAccount = data;
+    },
     setCreateCouple(state, data) {
       state.createCouple = data;
     },

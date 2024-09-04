@@ -1,9 +1,9 @@
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger>
-      <AccountAvatar v-if="account" :id="account.id" />
+      <AccountAvatar v-if="account" :id="account.id" :class="avatarClass" />
     </DropdownMenuTrigger>
-    <DropdownMenuContent v-if="account" align="end">
+    <DropdownMenuContent v-if="account" align="start">
       <DropdownMenuLabel>{{ greeting }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem> Minha conta </DropdownMenuItem>
@@ -44,6 +44,11 @@ import AccountAvatar from "@/components/ui/account-avatar.vue";
 import ToggleTheme from "@/components/platform/ui/toggle-theme.vue";
 
 export default {
+  props: {
+    avatarClass: {
+      type: String,
+    },
+  },
   computed: {
     account() {
       return this.$store.state.account;

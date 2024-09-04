@@ -1,7 +1,6 @@
 <template>
   <div class="flex flex-col flex-1 min-h-[100vh]">
     <NameDialog v-if="!hasData" />
-    <NavBar />
     <div v-if="account" class="flex flex-1">
       <RouterView />
     </div>
@@ -11,14 +10,12 @@
 
 <script>
 import { RouterView } from "vue-router";
-import NavBar from "@/components/platform/ui/nav-bar.vue";
 import Dialog from "@/components/ui/dialog.vue";
 import NameDialog from "@/components/platform/name-dialog.vue";
 
 export default {
   components: {
     RouterView,
-    NavBar,
     Dialog,
     NameDialog,
   },

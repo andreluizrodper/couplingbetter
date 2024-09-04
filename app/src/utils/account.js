@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { getCouple } from "./couple";
 import store from "@/store";
 
 const collection = "account";
@@ -95,8 +96,20 @@ const loginAccount = async ({ id }) => {
       },
     })
       .then((data) => data.json())
-      .then((res) => {
-        store.commit("setAccount", res[0]);
+      .then(async (res) => {
+        const account = res[0];
+        store.commit("setAccount", account);
+
+        const couple = await getCouple({ id: account.couple_id });
+        const otherHalfId = couple.accounts.filter(
+          (account_id) => account_id !== account.id
+        )[0];
+
+        const otherHalfAccount = await getAccount({
+          id: otherHalfId,
+          setStore: false,
+        });
+        store.commit("setOtherHalfAccount", otherHalfAccount);
       });
     return true;
   } catch (error) {

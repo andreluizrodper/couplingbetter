@@ -28,9 +28,7 @@
 import CreateScore from "@/components/platform/scoreboard/create.vue";
 import Item from "@/components/platform/scoreboard/item.vue";
 import { getScore } from "@/utils/score";
-import { getCouple } from "@/utils/couple";
 import Loading from "@/components/ui/loading.vue";
-import { getAccount } from "@/utils/account";
 
 export default {
   components: {
@@ -40,7 +38,6 @@ export default {
   },
   data() {
     return {
-      otherHalfAccount: null,
       items: null,
       loading: true,
     };
@@ -49,19 +46,12 @@ export default {
     account() {
       return this.$store.state.account;
     },
+    otherHalfAccount() {
+      return this.$store.state.otherHalfAccount;
+    },
   },
   async mounted() {
     this.getData();
-
-    const couple = await getCouple({ id: this.account.couple_id });
-    const otherHalfId = couple.accounts.filter(
-      (account_id) => account_id !== this.account.id
-    )[0];
-
-    this.otherHalfAccount = await getAccount({
-      id: otherHalfId,
-      setStore: false,
-    });
   },
   methods: {
     async getData() {

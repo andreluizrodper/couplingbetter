@@ -4,14 +4,13 @@
       <div class="grid gap-3">
         <div class="grid gap-1">
           <Label class="sr-only" for="phone"> Telefone </Label>
-          <Input
-            v-model="phone"
-            id="phone"
-            placeholder="Seu telefone"
-            type="text"
-            :disabled="loading"
-            v-mask="`(##) #####-####`"
-          />
+          <div class="relative z-30">
+            <MazPhoneNumberInput
+              @update="updatePhone"
+              style=""
+              :noExample="true"
+            />
+          </div>
         </div>
         <Button id="sign-in-button" :disabled="loading">
           <LoaderCircle v-if="loading" class="mr-2 h-4 w-4 animate-spin" />
@@ -33,6 +32,8 @@
 </template>
 
 <script>
+import MazPhoneNumberInput from "maz-ui/components/MazPhoneNumberInput";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -56,6 +57,7 @@ export default {
     Label,
     LoaderCircle,
     Loading,
+    MazPhoneNumberInput,
   },
   directives: { mask },
   data() {
@@ -66,6 +68,7 @@ export default {
       message: "",
       signPossible: false,
       recaptchaVerifier: null,
+      countryCode: null,
     };
   },
   mounted() {
@@ -73,6 +76,9 @@ export default {
     this.signPossible = true;
   },
   methods: {
+    updatePhone(phone) {
+      this.phone = phone.e164;
+    },
     doLoginGoogle() {
       const provider = new GoogleAuthProvider();
       signInWithPopup(auth, provider).then(async (result) => {
@@ -96,8 +102,7 @@ export default {
       this.error = false;
       this.message = "";
       this.$store.commit("setPhone", this.phone);
-      const phone = this.phone.replace(/[ |(|)|-]/g, "");
-      signInWithPhoneNumber(auth, `+55${phone}`, this.recaptchaVerifier)
+      signInWithPhoneNumber(auth, this.phone, this.recaptchaVerifier)
         .then((confirmationResult) => {
           this.$router.push({
             name: "pin",
